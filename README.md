@@ -1,2 +1,0 @@
-# nipmo
-Website
