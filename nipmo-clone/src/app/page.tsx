@@ -535,11 +535,11 @@ export default function Home() {
           <div className="border-t border-gray-200 mt-8 pt-8">
             <div className="flex justify-between items-center">
               <p className="text-sm text-gray-600">© 2024 NIPMO</p>
-              <Link href="/admin/login">
+              {/* <Link href="/admin/login">
                 <Button variant="ghost" className="text-xs text-gray-500 hover:text-gray-700">
                   Login
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
