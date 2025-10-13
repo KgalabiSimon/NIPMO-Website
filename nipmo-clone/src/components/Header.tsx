@@ -76,7 +76,7 @@ export default function Header() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3 sm:py-4">
             {/* Logos */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link href="/" className="flex items-center space-x-2 sm:space-x-4 hover:opacity-80 transition-opacity">
               <img
                 src="https://ext.same-assets.com/4026891959/1483683087.jpeg"
                 alt="Government Logo"
@@ -89,7 +89,7 @@ export default function Header() {
                 className="h-8 sm:h-10 lg:h-12 w-auto"
                 crossOrigin="anonymous"
               />
-            </div>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8">
