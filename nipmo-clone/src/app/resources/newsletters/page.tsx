@@ -82,7 +82,7 @@ export default function Newsletters() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header and Search */}
-            <div className="mb-12 text-center">
+            <div className="mb-12">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
                 NIPMO Newsletters
               </h1>
@@ -91,7 +91,7 @@ export default function Newsletters() {
               </p>
 
               {/* Search Bar */}
-              <div className="relative max-w-md mx-auto">
+              <div className="relative max-w-md">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
@@ -118,11 +118,11 @@ export default function Newsletters() {
                 {filteredNewsletters.map((newsletter) => (
                   <Card key={newsletter.id} className="bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 h-full flex flex-col overflow-hidden">
                     {/* Top Half - Image covering full width and height */}
-                    <div className="relative h-48 w-full bg-gray-50 flex items-center justify-center">
+                    <div className="relative h-48 w-full">
                       <img
                         src="https://ext.same-assets.com/4026891959/4105253294.png"
                         alt="NIPMO Newsletter"
-                        className="w-20 h-20 object-contain"
+                        className="w-full h-full object-cover"
                         crossOrigin="anonymous"
                       />
                     </div>
