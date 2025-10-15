@@ -25,6 +25,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
+        path: NIPMO-Website
         fetch-depth: 0
 
     - name: Set up Node.js
@@ -47,6 +48,8 @@ jobs:
 
     - name: npm install and build
       run: |
+        cd NIPMO-Website
+        echo "Contents of current directory:"
         ls -la
         echo "Current directory: $(pwd)"
         npm ci --legacy-peer-deps
@@ -57,6 +60,6 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: ./NIPMO-Website
         slot-name: 'production'  # or your staging slot name
         startup-command: 'npm start'  # Next.js production startup command
