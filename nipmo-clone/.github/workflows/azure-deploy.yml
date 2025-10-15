@@ -22,20 +22,31 @@ jobs:
     environment: production
     
     steps:
+    - name: Debug workspace
+      run: |
+        echo "Current directory before checkout:"
+        pwd
+        ls -la
+
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Debug after checkout
+      run: |
+        echo "Current directory after checkout:"
+        pwd
+        ls -la
+        echo "Repository contents:"
+        ls -la
+        echo "Full directory tree:"
+        tree .
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
-        cache-dependency-path: '**/package-lock.json'
-        
-    - name: Verify directory content
-      run: |
-        pwd
-        ls -la
+        working-directory: ./nipmo-clone
 
     - name: Azure Login
       uses: azure/login@v1
@@ -45,19 +56,32 @@ jobs:
         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1DBF40DDB4AF4F39B337BDA4B1B2CEB3 }}
 
     - name: npm install and build
-      working-directory: ./nipmo-clone
       run: |
-        echo "Contents of current directory:"
+        echo "Moving to nipmo-clone directory"
+        cd nipmo-clone || exit 1
+        echo "Contents of nipmo-clone directory:"
         ls -la
-        echo "Current directory: $(pwd)"
+        echo "Current working directory:"
+        pwd
+        echo "Installing dependencies..."
         npm ci --legacy-peer-deps
+        echo "Building application..."
         npm run build
 
+    - name: Prepare for deployment
+      run: |
+        echo "Current directory structure:"
+        pwd
+        ls -la
+        echo "Moving build output to deployment location"
+        mkdir -p deploy
+        cp -r nipmo-clone/* deploy/
+        
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: deploy
         slot-name: 'production'  # or your staging slot name
         startup-command: 'npm start'  # Next.js production startup command
