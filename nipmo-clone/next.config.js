@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
+  experimental: {
+    turbopack: {
+      root: path.resolve(__dirname),
+      rootPath: path.resolve(__dirname)
+    }
+  },
   allowedDevOrigins: ["*.preview.same-app.com"],
   images: {
     unoptimized: true,
